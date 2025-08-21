@@ -1,7 +1,7 @@
 from .llm import call_llm
 from . import tools
 
-def answer(q: str):
+def process_user_query(q: str):
     plan = call_llm(q)
 
     if plan and isinstance(plan, dict) and "tool" in plan:
