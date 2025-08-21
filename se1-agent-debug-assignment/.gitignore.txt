@@ -1,6 +1,0 @@
-# Virtual environments
-.venv/
-.venv-1/
-
-# Python cache
-agent/__pycache__/
