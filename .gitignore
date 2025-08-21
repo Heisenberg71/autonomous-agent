@@ -1,0 +1,9 @@
+# Type checker cache
+.mypy_cache/
+
+# Virtual environments
+.venv/
+.venv-1/
+
+# Python cache
+agent/__pycache__/
