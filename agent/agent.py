@@ -1,17 +1,29 @@
 from .llm import call_llm
 from . import tools
 
-def process_user_query(q: str):
-    plan = call_llm(q)
+# Tool names
+CALCULATOR = "calc"
+WEATHER = "weather"
+KNOWLEDGE_BASE = "kb"
 
-    if plan and isinstance(plan, dict) and "tool" in plan:
-        if plan["tool"] == "calc":
-            return tools.evaluate(plan["args"]["expr"])
-        elif plan["tool"] == "weather":
-            city = plan["args"]["city"]
-            t = tools.temp(city)
-            return f"{t} C"
-        elif plan["tool"] == "kb":
-            return tools.kb_lookup(plan["args"]["q"])
+# Plan keys
+TOOL_KEY = "tool"
+ARGS_KEY = "args"
+EXPRESSION_KEY = "expr"
+CITY_KEY = "city"
+QUERY_KEY = "q"
+
+def process_user_query(user_query):
+    plan = call_llm(user_query)
+    
+    if plan and isinstance(plan, dict) and TOOL_KEY in plan:
+        if plan[TOOL_KEY] == CALCULATOR:
+            return tools.evaluate(plan[ARGS_KEY][EXPRESSION_KEY])
+        if plan[TOOL_KEY] == WEATHER:
+            city = plan[ARGS_KEY][CITY_KEY]
+            temperature = tools.get_temperature(city)
+            return f"{temperature} C"
+        if plan[TOOL_KEY] == KNOWLEDGE_BASE:
+            return tools.search_from_knowledge_base(plan[ARGS_KEY][QUERY_KEY])
 
     return str(plan)

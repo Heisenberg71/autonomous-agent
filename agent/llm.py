@@ -21,7 +21,7 @@ def call_llm(prompt: str):
         return {"tool":"weaher","args":{"cty":"paris"}}
 
     if roll < 0.60:
-        return '{"tool": "weather", "args": {"city": "Pa ris" }'
+        return '{"tool": "weather", "args": {"city": "Paris" }'
 
     if roll < 0.80:
         return 'TOOL:calc EXPR="12.5% of 243"'

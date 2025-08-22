@@ -26,12 +26,12 @@ _TEMPS = {
     "amsterdam": "19.5"
 }
 
-def temp(city: str):
+def get_temperature(city: str):
     c = (city or "").strip()
     return _TEMPS.get(c, "20")
 
 
-def kb_lookup(q: str) -> str:
+def search_from_knowledge_base(q: str) -> str:
     try:
         with open("data/kb.json","r") as f:
             data = json.load(f)
