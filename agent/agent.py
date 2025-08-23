@@ -1,8 +1,8 @@
 from .llm import call_llm
-from . import tools
+from .tools import tools, calculator
 
 # Tool names
-CALCULATOR = "calc"
+CALCULATOR = "calculator"
 WEATHER = "weather"
 KNOWLEDGE_BASE = "kb"
 
@@ -18,7 +18,7 @@ def process_user_query(user_query):
     
     if plan and isinstance(plan, dict) and TOOL_KEY in plan:
         if plan[TOOL_KEY] == CALCULATOR:
-            return tools.evaluate(plan[ARGS_KEY][EXPRESSION_KEY])
+            return calculator.calculate(plan[ARGS_KEY])
         if plan[TOOL_KEY] == WEATHER:
             city = plan[ARGS_KEY][CITY_KEY]
             temperature = tools.get_temperature(city)

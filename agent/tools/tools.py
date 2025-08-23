@@ -1,7 +1,6 @@
 import json
 from typing import Any, Dict
 
-
 def _percent_of(expr: str):
     try:
         left, right = expr.split("% of")
