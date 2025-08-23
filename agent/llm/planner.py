@@ -1,6 +1,6 @@
 import json
 
-def initiate_planner(user_query: str):
+def initiate_planner(user_query: str) -> dict:
     """
     Generates a tool usage plan for the given user query by identifying which tool 
     should be used and extracting the necessary arguments for that tool.
@@ -72,7 +72,7 @@ def initiate_planner(user_query: str):
 
     return ask_to_llm(system_prompt, user_query)
 
-def call_llm_with_knowledge_base(user_query, knowledge_base):
+def call_llm_with_knowledge_base(user_query, knowledge_base)  -> dict:
     """
     Generates a response to the user's query by leveraging a provided knowledge base.
 
@@ -95,7 +95,7 @@ def call_llm_with_knowledge_base(user_query, knowledge_base):
 
     return ask_to_llm(system_prompt, user_query, knowledge_base)
 
-def find_top_matched_titles(user_query, titles):
+def find_top_matched_titles(user_query, titles)  -> dict:
     """
     Identifies the top 3 most relevant titles from a list based on the user's query.
 
@@ -124,7 +124,7 @@ def find_top_matched_titles(user_query, titles):
     
     return ask_to_llm(system_prompt, user_query, titles)
 
-def ask_to_llm(system_prompt, user_query, knowledge_base=None):
+def ask_to_llm(system_prompt, user_query, knowledge_base=None) -> dict:
     """
     Simulates a call to a language model by taking a system prompt, user query,
     and optionally a knowledge base, then returning a predetermined response.

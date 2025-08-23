@@ -26,7 +26,7 @@ def load_knowledge_base():
     except json.JSONDecodeError:
         raise ValueError("Invalid JSON format in knowledge base file")
     
-def get_all_titles():
+def get_all_titles() -> list:
     """
     Get all titles from the knowledge base.
     
