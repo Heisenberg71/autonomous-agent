@@ -1,5 +1,5 @@
-from .llm import call_llm
-from .tools import tools, calculator
+from .llm import call_llm, call_llm_with_knowledge_base
+from .tools import tools, calculator, weather
 
 # Tool names
 CALCULATOR = "calculator"
@@ -20,9 +20,8 @@ def process_user_query(user_query):
         if plan[TOOL_KEY] == CALCULATOR:
             return calculator.calculate(plan[ARGS_KEY])
         if plan[TOOL_KEY] == WEATHER:
-            city = plan[ARGS_KEY][CITY_KEY]
-            temperature = tools.get_temperature(city)
-            return f"{temperature} C"
+            weatherHistory = weather.getWeather(plan[ARGS_KEY])
+            return call_llm_with_knowledge_base(user_query, weatherHistory)
         if plan[TOOL_KEY] == KNOWLEDGE_BASE:
             return tools.search_from_knowledge_base(plan[ARGS_KEY][QUERY_KEY])
 

@@ -5,5 +5,9 @@
 .venv/
 .venv-1/
 
+# Environment variables
+.env
+
 # Python cache
 agent/__pycache__/
+agent/tools/__pycache__/

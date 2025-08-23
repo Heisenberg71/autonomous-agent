@@ -6,7 +6,8 @@ def call_llm(prompt: str):
     sometimes malformed JSON, and sometimes a direct answer.
     """
 
-    return {"tool": "calculator","args": {"operand": "%","operator_1": 12.5,"operator_2": 243}}
+    return {"tool": "weather", "args": {"city": "dhaka", "from_date": "2025-08-17", "to_date": "2025-08-23"}}
+    # return {"tool": "calculator","args": {"operand": "%","operator_1": 12.5,"operator_2": 243}}
     
     # p = prompt.lower()
     # roll = random.random()
@@ -32,3 +33,12 @@ def call_llm(prompt: str):
     # if "ada lovelace" in p:
     #     return "Ada Lovelace was a 19th-century mathematician and early computing pioneer."
     # return "I think you are asking about: " + prompt[:60]
+
+def call_llm_with_knowledge_base(prompt, knowledge_base):
+    """
+    A fake LLM that take prompt and knowledge base as input
+    and returns output.
+    """
+
+    print(f"Debug - LLM called with prompt: {prompt} and knowledge base: {knowledge_base}")
+    return "The weather is good"
