@@ -17,7 +17,7 @@ if not API_KEY:
 
 BASE_URL = "http://api.weatherapi.com/v1"
 
-def getWeather(args: dict):
+def get_weather_details(args: dict):
     """
     Get weather data for a city between two dates.
     

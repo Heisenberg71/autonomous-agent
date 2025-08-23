@@ -1,4 +1,4 @@
-import json, random
+import json
 
 def initiate_planner(user_query: str):
     """
@@ -142,8 +142,17 @@ def ask_to_llm(system_prompt, user_query, knowledge_base=None):
               currency conversion tool plan.
     """
 
-    return {"tool": "currency_converter", "args": {"from_currency": "USD", "to_currency": "EUR", "amount": 100}}
-    # return {"tool": "knowledge_base", "args": {"query": user_query}}
-    # return {"tool": "weather", "args": {"city": "dhaka", "from_date": "2025-08-17", "to_date": "2025-08-23"}}
+    # Uncomment the line below to simulate a currency conversion tool response
+    # return {"tool": "currency_converter", "args": {"from_currency": "USD", "to_currency": "EUR", "amount": 100}}
+    
+    # Uncomment the lines below to simulate a weather tool response    
+    # if(knowledge_base == None):
+    #     return {"tool": "weather", "args": {"city": "dhaka", "from_date": "2025-08-17", "to_date": "2025-08-23"}}
+    # return "The weather is sunny with a high of 25°C and a low of 15°C."
+    
+
+    # Uncomment the line below to simulate a calculator tool response
     # return {"tool": "calculator","args": {"operand": "%","operator_1": 12.5,"operator_2": 243}}
+    
+    # Uncomment the line below to simulate a knowledge base tool response
     # return {"top_matched_titles": ["Alan Turing"]}

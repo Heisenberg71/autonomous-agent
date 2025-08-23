@@ -49,3 +49,15 @@ def calculate(args: dict) -> float:
         return f"Invalid values: {str(e)}"
     except Exception as e:
         return f"Calculation error: {str(e)}"
+    
+def generate_response(calculated_result) -> str:
+    """
+    Generate a user-friendly response based on the calculation result.
+    
+    Args:
+        calculated_result (float or str): The result of the calculation or an error message.
+    
+    Returns:
+        str: A formatted response string.
+    """
+    return f"The result of the calculation is: {calculated_result}"
