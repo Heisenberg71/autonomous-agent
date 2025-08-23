@@ -1,5 +1,5 @@
-from .llm import call_llm, call_llm_with_knowledge_base, find_top_matched_titles
-from .tools import tools, calculator, weather, knowledge_loader, currency_converter
+from .llm import planner
+from .tools import calculator, weather, knowledge_loader, currency_converter
 
 # Tool names
 CALCULATOR = "calculator"
@@ -15,20 +15,19 @@ CITY_KEY = "city"
 QUERY_KEY = "query"
 
 def process_user_query(user_query):
-    plan = call_llm(user_query)
+    plan = planner.initiate_planner(user_query)
     
     if plan and isinstance(plan, dict) and TOOL_KEY in plan:
         if plan[TOOL_KEY] == CALCULATOR:
             return calculator.calculate(plan[ARGS_KEY])
         if plan[TOOL_KEY] == WEATHER:
             weather_history = weather.getWeather(plan[ARGS_KEY])
-            return call_llm_with_knowledge_base(user_query, weather_history)
+            return planner.call_llm_with_knowledge_base(user_query, weather_history)
         if plan[TOOL_KEY] == KNOWLEDGE_BASE:
             titles = knowledge_loader.get_all_titles()
-            top_matched_titles = find_top_matched_titles(plan[ARGS_KEY][QUERY_KEY], titles)
+            top_matched_titles = planner.find_top_matched_titles(plan[ARGS_KEY][QUERY_KEY], titles)
             top_matched_knowledge = knowledge_loader.search_titles_and_details(top_matched_titles)
-            return call_llm_with_knowledge_base(user_query, top_matched_knowledge)
+            return planner.call_llm_with_knowledge_base(user_query, top_matched_knowledge)
         if plan[TOOL_KEY] == CURRENCY_CONVERTER:
             return currency_converter.convert_currency(plan[ARGS_KEY])
-
-    return str(plan)
+    return "Sorry, I couldn't understand your request."

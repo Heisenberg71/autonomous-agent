@@ -78,5 +78,5 @@ def getWeather(args: dict):
 
     except (ValueError) as e:
         return f"Error from system: {str(e)}"
-    except Exception as e:
-        return f"Weather Data Fetching Error: {str(e)}"
+    except requests.RequestException as e:
+        raise ConnectionError(f"Failed to fetch weather detail: {str(e)}")

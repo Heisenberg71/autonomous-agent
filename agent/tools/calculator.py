@@ -33,8 +33,8 @@ def calculate(args: dict) -> float:
             '+': lambda x, y: x + y,
             '-': lambda x, y: x - y,
             '*': lambda x, y: x * y,
-            '/': lambda x, y: x / y if y != 0 else float('inf'),
-            '%': lambda x, y: (x / 100) * y
+            '/': lambda x, y: round(x / y, 2) if y != 0 else float('inf'),
+            '%': lambda x, y: round((x / 100) * y, 2)
         }
 
         # Validate operand
@@ -45,7 +45,7 @@ def calculate(args: dict) -> float:
         result = operations[operand](operator_1, operator_2)
         return result
 
-    except (TypeError, ValueError) as e:
-        return f"Invalid input: {str(e)}"
+    except (ValueError) as e:
+        return f"Invalid values: {str(e)}"
     except Exception as e:
         return f"Calculation error: {str(e)}"

@@ -23,13 +23,7 @@ def convert_currency(args: Dict[str, Any]) -> Dict[str, Any]:
     
     Returns:
         dict: Conversion result with format:
-            {
-                "from": "USD",
-                "to": "EUR",
-                "amount": 100,
-                "result": 92.14,
-                "rate": 0.9214
-            }
+            If amount of 100.0 is converted from USD to EUR then the amount is 85.6 and the conversion rate is 0.856
     
     Raises:
         ValueError: If invalid currency codes or amount
@@ -60,13 +54,7 @@ def convert_currency(args: Dict[str, Any]) -> Dict[str, Any]:
         rate = rates[to_currency]
         result = amount * rate
 
-        return {
-            "from": from_currency,
-            "to": to_currency,
-            "amount": amount,
-            "result": round(result, 2),
-            "rate": rate
-        }
+        return "If amount of " + str(amount) + " is converted from " + str(from_currency) + " to " + str(to_currency) + " then the amount is " + str(round(result, 2)) + " and the conversion rate is " + str(rate)  
 
     except requests.RequestException as e:
         raise ConnectionError(f"Failed to fetch exchange rates: {str(e)}")

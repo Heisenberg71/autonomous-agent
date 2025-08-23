@@ -7,7 +7,7 @@ DETAIL = "detail"
 
 def load_knowledge_base():
     """Load knowledge base from JSON file"""
-    knowledge_base_path = os.path.join(os.path.dirname("data/knowledge_source.json"))
+    knowledge_base_path = os.path.join(os.path.dirname("data-source/knowledge_base.json"))
     try:
         with open(knowledge_base_path, 'r') as file:
             return json.load(file)
@@ -55,7 +55,7 @@ def search_titles_and_details(search_query: str) -> list[dict[str, str]]:
         json.JSONDecodeError: If JSON format is invalid
     """
     try:
-        with open("data/knowledge_source.json", "r") as f:
+        with open("data-source/knowledge_base.json", "r") as f:
             knowledge_base = json.load(f)
 
         print("knowledge_base: ", knowledge_base.get(ENTRIES, []))
@@ -66,7 +66,6 @@ def search_titles_and_details(search_query: str) -> list[dict[str, str]]:
             if title in search_query.lower():
                 matched_entries.append({TTILE: entry.get(TTILE, ""), DETAIL: entry.get(DETAIL, "")})
 
-        print(f"Debug - Matched entries: {matched_entries}")
         return matched_entries
         
     except Exception as e:
