@@ -19,17 +19,14 @@ def process_user_query(user_query):
     
     if plan and isinstance(plan, dict) and TOOL_KEY in plan:
         if plan[TOOL_KEY] == CALCULATOR:
-            calculated_result = calculator.calculate(plan[ARGS_KEY])
-            return calculator.generate_response(calculated_result)
+            return calculator.use_calculator_tool(plan[ARGS_KEY])
         if plan[TOOL_KEY] == WEATHER:
             weather_history = weather.get_weather_details(plan[ARGS_KEY])
             return planner.call_llm_with_knowledge_base(user_query, weather_history)
         if plan[TOOL_KEY] == KNOWLEDGE_BASE:
             titles = knowledge_loader.get_all_titles()
             top_matched_titles = planner.find_top_matched_titles(plan[ARGS_KEY][QUERY_KEY], titles)
-            print("top matched titles: ", top_matched_titles)
             top_matched_knowledge = knowledge_loader.search_titles_and_details(top_matched_titles)
-            print("top matched knowledge: ", top_matched_knowledge)
             return planner.call_llm_with_knowledge_base(user_query, top_matched_knowledge)
         if plan[TOOL_KEY] == CURRENCY_CONVERTER:
             return currency_converter.convert_currency(plan[ARGS_KEY])

@@ -61,3 +61,16 @@ def generate_response(calculated_result) -> str:
         str: A formatted response string.
     """
     return f"The result of the calculation is: {calculated_result}"
+
+def use_calculator_tool(args: dict) -> str:
+    """
+    Use the calculator tool to perform a calculation and generate a response.
+    
+    Args:
+        args (dict): Dictionary containing calculation parameters.
+    
+    Returns:
+        str: A user-friendly response with the calculation result.
+    """
+    result = calculate(args)
+    return generate_response(result)
