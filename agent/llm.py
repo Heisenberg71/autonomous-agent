@@ -6,7 +6,8 @@ def call_llm(prompt: str):
     sometimes malformed JSON, and sometimes a direct answer.
     """
 
-    return {"tool": "knowledge_base", "args": {"query": prompt}}
+    return {"tool": "currency_converter", "args": {"from_currency": "USD", "to_currency": "EUR", "amount": 100}}
+    # return {"tool": "knowledge_base", "args": {"query": prompt}}
     # return {"tool": "weather", "args": {"city": "dhaka", "from_date": "2025-08-17", "to_date": "2025-08-23"}}
     # return {"tool": "calculator","args": {"operand": "%","operator_1": 12.5,"operator_2": 243}}
     
@@ -44,7 +45,7 @@ def call_llm_with_knowledge_base(prompt, knowledge_base):
     print(f"Debug - LLM called with prompt: {prompt} and knowledge base: {knowledge_base}")
     return "The weather is good"
 
-def call_llm_with_titles_from_knowledge_base(prompt, knowledge_base):
+def find_top_matched_titles(prompt, knowledge_base):
     """
     A fake LLM that take prompt and knowledge base as input
     and returns output.
