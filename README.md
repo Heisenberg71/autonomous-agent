@@ -1,26 +1,31 @@
-# Refactor & Extend: Simple Tool-Using Agent
+# Autonomous Agent: Enhanced with Multiple Tools
 
-**Goal:** Turn a brittle, partially working agent into production-quality code, then extend it with a new tool and real tests.
-
----
-You must **refactor for robustness**, **add one new tool** (translator / unit converter), and **add proper tests**.
----
-
-## Your Tasks (Summary)
-
-1. **Refactor**
-2. **Improve**
-3. **Add ONE new tool** 
-4. **Write tests**
-5. **Improve Documentation**
-
-See the assignment brief for full details (shared in the job post).
+## Introduction
+An **AI-powered autonomous agent** designed to handle user queries using any configured **Large Language Model (LLM)**.  
+To effectively respond to diverse user requests, the LLM can leverage various **specialized tools**.  
+By intelligently selecting the appropriate tool, the agent ensures **efficient, accurate, and autonomous query handling**.
 
 ---
 
-## Quick Start
+##  Available Tools
+-  **Calculator** – Perform arithmetic and percentage calculations  
+-  **Currency Converter** – Convert exchange rates in real time  
+-  **Knowledge Source Loader** – Retrieve factual and structured information  
+-  **Weather Forecaster** – Get up-to-date weather information  
 
-### Python 3.10+ recommended
+---
+
+##  External Services
+- **Weather API** → Fetches real-time weather forecasts  
+- **Exchangerate-API** → Provides accurate and current currency exchange rates  
+
+---
+
+##  Quick Start
+
+###  Requirements
+- Python **3.12+** (recommended)  
+- Virtual environment for isolated dependencies  
 
 ```bash
 python -m venv .venv
@@ -28,7 +33,9 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### Run
+---
+
+###  Run Examples
 
 ```bash
 python main.py "What is 12.5% of 243?"
@@ -37,23 +44,17 @@ python main.py "Who is Ada Lovelace?"
 python main.py "Add 10 to the average temperature in Paris and London right now."
 ```
 
-### Test
+>  **Note:** As this project currently uses a **simulated LLM** instead of a real one,  
+> responses must be manually configured in the `planner.py` file.  
+
+---
+
+###  Run Tests
 
 ```bash
 pytest -q
 ```
 
-> Note: The fake LLM sometimes emits malformed JSON to simulate real-world flakiness.
-
 ---
 
-## What we expect you to change
-
-- Split responsibilities into modules/classes.
-- Add a schema for tool plans; validate inputs and tool names.
-- Make tool calls resilient and typed;
-- Add one new tool and tests that prove your design is extensible.
-- Update this README with an architecture diagram (ASCII ok) and clear instructions.
-- You can use Real LLMs or a fake one, but ensure your code is robust against malformed responses.
-
-Good luck & have fun!
+ Now you're ready to explore the **Autonomous Agent** with tool-enhanced intelligence!
