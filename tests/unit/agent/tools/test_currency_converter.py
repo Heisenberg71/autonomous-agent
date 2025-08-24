@@ -3,9 +3,9 @@ import sys
 import importlib
 from unittest.mock import patch, MagicMock
 import pytest
-import requests  # for RequestException
+import requests
 
-# Ensure src/ is on sys.path (adjust the relative path if your tree differs)
+# Add src/ to sys.path so imports work
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../src")))
 
 @pytest.fixture
@@ -27,14 +27,17 @@ def currency_module(monkeypatch):
 # --------- Success case ---------
 def test_convert_currency_success(currency_module):
     with patch(f"{currency_module.__name__}.requests.get") as mock_get:
+        # Arrange
         mock_response = MagicMock()
         mock_response.json.return_value = {"rates": {"EUR": 0.85, "USD": 1.0}}
         mock_response.raise_for_status.return_value = None
         mock_get.return_value = mock_response
 
+        # Act
         args = {"from_currency": "USD", "to_currency": "EUR", "amount": 100}
         result = currency_module.convert_currency(args)
 
+        # Assert
         assert "amount is 85.0" in result
         assert "conversion rate is 0.85" in result
         mock_get.assert_called_once_with("https://api.exchangerate-api.com/v4/latest/USD")
@@ -47,7 +50,7 @@ def test_missing_parameters(currency_module):
         currency_module.convert_currency(args)
 
 def test_negative_amount(currency_module):
-    args = {"from_currency": "USD", "to_currency": "EUR", "amount": -5}
+    args = {"from_currency": "USD", "to_currency": "EUR", "amount": -5} # negative amount
     with pytest.raises(ValueError, match="Amount must be positive"):
         currency_module.convert_currency(args)
 

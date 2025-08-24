@@ -5,6 +5,7 @@ import sys
 import requests
 from dotenv import load_dotenv
 
+# Add src/ to sys.path so imports work
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../src")))
 
 from agent.tools.weather import get_weather_details, API_KEY, DATE, MAX_TEMPERATURE_IN_CELCIOUS, MIN_TEMPERATURE_IN_CELCIOUS, AVERAGE_TEMPERATURE_IN_CELCIOUS, WEATHER_CONDITION

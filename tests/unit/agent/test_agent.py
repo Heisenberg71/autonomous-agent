@@ -3,6 +3,7 @@ from unittest.mock import patch, MagicMock
 import os
 import sys
 
+# Add src/ to sys.path so imports work
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../../src")))
 
 from agent.agent import process_user_query
@@ -64,6 +65,7 @@ class TestProcessUserQuery(unittest.TestCase):
     @patch("agent.agent.planner")
     def test_knowledge_base_tool(self, mock_planner, mock_currency, mock_knowledge, mock_weather, mock_calculator):
         # Mock planner response for knowledge base
+        # Arrange
         mock_planner.initiate_planner.return_value = {
             "tool": "knowledge_base",
             "args": {"query": "Python decorators"}
@@ -73,11 +75,15 @@ class TestProcessUserQuery(unittest.TestCase):
         mock_knowledge.search_titles_and_details.return_value = [{"title": "Python Decorators", "details": "Example details"}]
         mock_planner.call_llm_with_knowledge_base.return_value = "Decorators allow wrapping functions"
 
+        # Act
         result = process_user_query("Tell me about Python decorators")
 
+        # Arrange
         mock_knowledge.get_all_titles.assert_called_once()
         mock_planner.find_top_matched_titles.assert_called_once_with("Python decorators", ["Python Basics", "Python Decorators"])
         mock_knowledge.search_titles_and_details.assert_called_once_with(["Python Decorators"])
+
+        # Assert
         self.assertEqual(result, "Decorators allow wrapping functions")
 
     @patch("agent.agent.calculator")
@@ -87,20 +93,28 @@ class TestProcessUserQuery(unittest.TestCase):
     @patch("agent.agent.planner")
     def test_currency_converter_tool(self, mock_planner, mock_currency, mock_knowledge, mock_weather, mock_calculator):
         # Mock planner response for currency converter
+        # Arrange
         mock_planner.initiate_planner.return_value = {
             "tool": "currency_converter",
             "args": {"amount": 100, "from_currency": "USD", "to_currency": "EUR"}
         }
         mock_currency.convert_currency.return_value = "Converted amount: 92 EUR"
 
+        # Act
         result = process_user_query("Convert 100 USD to EUR")
-
         mock_currency.convert_currency.assert_called_once_with({"amount": 100, "from_currency": "USD", "to_currency": "EUR"})
+
+        # Assert
         self.assertEqual(result, "Converted amount: 92 EUR")
 
     @patch("agent.agent.planner")
     def test_unknown_tool(self, mock_planner):
         # Planner returns something unexpected
+        # Arrange
         mock_planner.initiate_planner.return_value = {"tool": "unknown"}
+
+        # Act
         result = process_user_query("Do something weird")
+
+        # Assert
         self.assertEqual(result, "Sorry, I couldn't understand your request.")
