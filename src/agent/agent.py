@@ -16,6 +16,7 @@ QUERY_KEY = "query"
 
 def process_user_query(user_query):
     plan = planner.initiate_planner(user_query)
+    print(f"Planner returned plan: {plan}")
     
     if plan and isinstance(plan, dict) and TOOL_KEY in plan:
         if plan[TOOL_KEY] == CALCULATOR:
