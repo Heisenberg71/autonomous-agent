@@ -1,5 +1,6 @@
 # Type checker cache
 .mypy_cache/
+.pytest_cache/
 
 # Virtual environments
 .venv/
@@ -9,6 +10,10 @@
 .env
 
 # Python cache
-agent/__pycache__/
-agent/tools/__pycache__/
-agent/llm/__pycache__/
+src/.pytest_cache/
+src/agent/__pycache__/
+src/agent/tools/__pycache__/
+src/agent/llm/__pycache__/
+tests/.pytest_cache/
+tests/unit/agent/tools/__pycache__/
+tests/unit/agent/tools/.pytest_cache/
