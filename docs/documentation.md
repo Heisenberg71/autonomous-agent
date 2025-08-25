@@ -353,6 +353,14 @@ The system has undergone rigorous **testing and validation** to ensure stability
 - Currently, adding a new tool requires modification in **`planner.py`**.  
 - A better design approach would follow the **Open-Closed Principle**:  
   - **Open for extension** (easily add new tools)  
-  - **Closed for modification** (no need to change existing code).  
+  - **Closed for modification** (no need to change existing code).
+ 
+### 5. Effective Logging
+- Logging should be added for debug perposes
+- Helps monitor system workflow when user interacts
+
+### 5. Load Test & Latency Test
+- How much concurrent call the system can take in the current configaration should be measured
+- Latency to produce response should be tracked and measured
 
 ---
